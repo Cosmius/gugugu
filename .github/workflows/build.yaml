@@ -25,8 +25,8 @@ jobs:
       - uses: haskell/actions/setup@v2
         id: setup-haskell
         with:
-          ghc-version: "8.8.4"
           enable-stack: true
+          stack-no-global: true
       - run: bash .github/workflows/setup.sh
         id: setup
         shell: bash
@@ -34,7 +34,7 @@ jobs:
         with:
           key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('stack.yaml', '**/package.yaml', 'hpack-common.yaml') }}
           path: ${{ steps.setup.outputs.STACK_ROOT }}
-      - run: stack --system-ghc build --pedantic
+      - run: stack build --pedantic --copy-bins
         shell: bash
       - run: bash .github/workflows/test.sh
         shell: bash
