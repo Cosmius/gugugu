@@ -33,6 +33,6 @@ jobs:
       - uses: actions/cache@v3
         with:
           key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('stack.yaml', '**/package.yaml', 'hpack-common.yaml') }}
-          path: ${{ steps.setup.STACK_ROOT }}
+          path: ${{ steps.setup.outputs.STACK_ROOT }}
       - run: stack --system-ghc build --pedantic
         shell: bash

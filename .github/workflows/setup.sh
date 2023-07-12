@@ -15,12 +15,12 @@ esac
 
 case "$RUNNER_OS" in
 	Linux|macOS)
-		STACK_ROOT="$BUILD_SOURCESDIRECTORY/build/stack"
+		STACK_ROOT="$GITHUB_WORKSPACE/build/stack"
 		UNIX_STACK_ROOT="$STACK_ROOT"
 		STACK_BIN="$STACK_ROOT/bin"
 		;;
 	Windows)
-		STACK_ROOT="$BUILD_SOURCESDIRECTORY\\build\\stack"
+		STACK_ROOT="$GITHUB_WORKSPACE\\build\\stack"
 		UNIX_STACK_ROOT=$(cygpath --unix $STACK_ROOT)
 		STACK_BIN="$STACK_ROOT\\bin"
 		;;
