@@ -2,13 +2,11 @@
 
 set -e
 
-env | sort
-
 case "$RUNNER_ARCH" in
 	X64)
 		;;
 	*)
-		echo "Unexpected RUNNER_OS = $RUNNER_OS"
+		echo "Unexpected RUNNER_OS=$RUNNER_OS"
 		exit 1
 		;;
 esac
@@ -25,7 +23,7 @@ case "$RUNNER_OS" in
 		STACK_BIN="$STACK_ROOT\\bin"
 		;;
 	*)
-		echo "Unexpected RUNNER_OS = $RUNNER_OS"
+		echo "Unexpected RUNNER_OS=$RUNNER_OS"
 		exit 1
 		;;
 esac

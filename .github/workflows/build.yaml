@@ -36,3 +36,12 @@ jobs:
           path: ${{ steps.setup.outputs.STACK_ROOT }}
       - run: stack --system-ghc build --pedantic
         shell: bash
+      - run: bash .github/workflows/test.sh
+        shell: bash
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          artifactName: x-test-${{ runner.os }}-${{ runner.arch }}
+          targetPath: tmp/test
+        condition: and(eq(variables['runTests.failed'], 'true'), failed())
+        displayName: Publish debug file for tests
