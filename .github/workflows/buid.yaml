@@ -1,0 +1,30 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+      - feature/*
+      - ci/*
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - windows-2022
+          - macos-12
+          - ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: haskell/actions/setup@v2
+        with:
+          ghc-version: "8.8.4"
+          enable-stack: true
+      - run: bash .azure-pipeline/setup.sh
+        shell: bash
