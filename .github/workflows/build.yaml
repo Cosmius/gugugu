@@ -41,7 +41,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
-          artifactName: x-test-${{ runner.os }}-${{ runner.arch }}
-          targetPath: tmp/test
-        condition: and(eq(variables['runTests.failed'], 'true'), failed())
-        displayName: Publish debug file for tests
+          name: x-test-${{ runner.os }}-${{ runner.arch }}
+          path: tmp/test
