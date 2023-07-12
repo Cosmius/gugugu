@@ -23,8 +23,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: haskell/actions/setup@v2
+        id: setup-haskell
         with:
           ghc-version: "8.8.4"
           enable-stack: true
-      - run: bash .azure-pipeline/setup.sh
+      - run: bash .github/workflows/setup.sh
+        id: setup
+        shell: bash
+      - uses: actions/cache@v3
+        with:
+          key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles("stack.yaml*", "**/package.yaml", "hpack-common.yaml") }}
+          path: ${{ setup.STACK_ROOT }}
+      - run: stack --system-ghc build --pedantic
         shell: bash
