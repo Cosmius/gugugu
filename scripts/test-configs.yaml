@@ -13,24 +13,24 @@ jsonhttp:
     client:
       command: python -m guguguexamples.jsonhttp.client
       cwd: examples/lang/python
-  # rust:
-  #   server:
-  #     command: cargo run --bin gugugu-example-rust-jsonhttp-server
-  #     cwd: examples/lang/rust
-  #   client:
-  #     command: cargo run --bin gugugu-example-rust-jsonhttp-client
-  #     cwd: examples/lang/rust
-  # scala:
-  #   server:
-  #     command: gradle runJsonHttpServer
-  #     cwd: examples/lang/scala
-  #   client:
-  #     command: gradle runJsonHttpClient
-  #     cwd: examples/lang/scala
-  # typescript:
-  #   server:
-  #     command: node build/js/src/jsonhttp/server.js
-  #     cwd: examples/lang/typescript
-  #   client:
-  #     command: node build/js/src/jsonhttp/client.js
-  #     cwd: examples/lang/typescript
+  rust:
+    server:
+      command: cargo run --bin gugugu-example-rust-jsonhttp-server
+      cwd: examples/lang/rust
+    client:
+      command: cargo run --bin gugugu-example-rust-jsonhttp-client
+      cwd: examples/lang/rust
+  scala:
+    server:
+      command: gradle runJsonHttpServer
+      cwd: examples/lang/scala
+    client:
+      command: gradle runJsonHttpClient
+      cwd: examples/lang/scala
+  typescript:
+    server:
+      command: node build/js/src/jsonhttp/server.js
+      cwd: examples/lang/typescript
+    client:
+      command: node build/js/src/jsonhttp/client.js
+      cwd: examples/lang/typescript
