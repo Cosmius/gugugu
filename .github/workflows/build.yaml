@@ -34,8 +34,11 @@ jobs:
         with:
           key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('stack.yaml', '**/package.yaml', 'hpack-common.yaml') }}
           path: ${{ steps.setup.outputs.STACK_ROOT }}
-      - run: stack build --pedantic --copy-bins
+      - run: bash .github/workflows/build.sh
         shell: bash
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.7"
       - run: bash .github/workflows/test.sh
         shell: bash
       - uses: actions/upload-artifact@v3
