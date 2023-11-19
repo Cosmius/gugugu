@@ -1,0 +1,48 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+      - feature/*
+      - ci/*
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - windows-2022
+          - macos-12
+          - ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: haskell/actions/setup@v2
+        id: setup-haskell
+        with:
+          enable-stack: true
+          stack-no-global: true
+      - run: bash .github/workflows/setup.sh
+        id: setup
+        shell: bash
+      - uses: actions/cache@v3
+        with:
+          key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('stack.yaml', '**/package.yaml', 'hpack-common.yaml') }}
+          path: ${{ steps.setup.outputs.STACK_ROOT }}
+      - run: bash .github/workflows/build.sh
+        shell: bash
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.7"
+      - run: bash .github/workflows/test.sh
+        shell: bash
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: x-test-${{ runner.os }}-${{ runner.arch }}
+          path: tmp/test
