@@ -18,4 +18,4 @@ stack --version
 
 bash run-gugugu.sh
 
-stack build gugugu-haskell-example
+stack build gugugu-haskell-example --pedantic

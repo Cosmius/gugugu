@@ -11,7 +11,6 @@ dependencies:
   - mtl
   - aeson
   - scientific
-  - unordered-containers
 
   - case-insensitive
   - http-types

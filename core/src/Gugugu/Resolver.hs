@@ -276,7 +276,7 @@ lookupImported ResolutionContext{ rcCurrentModule = Module{..} , .. } name = do
     case Map.lookup iModuleName rcModules of
       Just md -> pure $ (md,) <$> lookupModule md name
       Nothing -> Left $ "cannot resolve module: " <> T.unpack iModuleName
-  pure . fmap getLast . getOption $ foldMap (Option . fmap Last) rs
+  pure . fmap getLast $ foldMap (fmap Last) rs
 
 lookupModule :: Module -> Text -> Maybe Data
 lookupModule Module{..} name = find ((== name) . dataName) moduleDatas

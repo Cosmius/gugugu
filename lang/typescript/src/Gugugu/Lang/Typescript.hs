@@ -79,7 +79,7 @@ makeModules :: MonadError String m
 makeModules opts@GuguguTsOption{..} modules = do
   let moduleMap = Map.fromList $
         fmap (\md@Module{..} -> (moduleName, md)) modules
-  foreignCodecPartsAndfiles <- for modules $ \md@Module{..} -> do
+  foreignCodecPartsAndfiles <- for modules $ \md -> do
     let rCtx = ResolutionContext
           { rcModules       = moduleMap
           , rcCurrentModule = md

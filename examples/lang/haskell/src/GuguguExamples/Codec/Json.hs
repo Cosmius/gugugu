@@ -10,7 +10,8 @@ module GuguguExamples.Codec.Json
 import           Control.Monad.Fail
 import           Control.Monad.State               hiding (fail)
 import           Data.Aeson                        (Value (..))
-import qualified Data.HashMap.Strict               as HM
+import qualified Data.Aeson.KeyMap                 as KM
+import qualified Data.Aeson.Key                    as K
 import           Data.List.NonEmpty                (NonEmpty (..), (<|))
 import qualified Data.List.NonEmpty                as NonEmpty
 import           Data.Scientific
@@ -59,12 +60,12 @@ instance EncoderImpl JsonCodecImpl Value (Either String) (StateT Cursor P) where
     Success _         -> Left "unexpected finalize"
 
   encodeRecord _ k c a = do
-    putFocus (Object HM.empty)
+    putFocus (Object KM.empty)
     k c a
   encodeRecordField _ name c a = do
     Object o <- getFocus
     encoded <- withPushed Null $ encode c a *> getFocus
-    putFocus $ Object $ HM.insert name encoded o
+    putFocus $ Object $ KM.insert (K.fromText name) encoded o
 
   encodeEnum _ asName c = encodeString c . asName
 
@@ -92,7 +93,7 @@ instance DecoderImpl JsonCodecImpl Value (Either String) (StateT Cursor P) where
     k c
   decodeRecordField _ name c = do
     Object o <- getFocus
-    case HM.lookup name o of
+    case KM.lookup (K.fromText name) o of
       Just v  -> withPushed v $ decode c
       Nothing -> fail $ printf "cannot read field: %s" name
 

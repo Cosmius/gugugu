@@ -78,7 +78,7 @@ makeModules :: MonadError String m
 makeModules opts@GuguguScalaOption{..} modules = do
   let moduleMap = Map.fromList $
         fmap (\md@Module{..} -> (moduleName, md)) modules
-  foreignCodecPartsAndFilesMaps <- for modules $ \md@Module{..} -> do
+  foreignCodecPartsAndFilesMaps <- for modules $ \md -> do
     let rCtx = ResolutionContext
           { rcModules       = moduleMap
           , rcCurrentModule = md
@@ -148,7 +148,7 @@ makeGuguguData :: GuguguK r m
                -> Data
                -> DataCon
                -> m (FilePath, CompilationUnit)
-makeGuguguData md@Module{..} d@Data{..} dataCon = do
+makeGuguguData md d dataCon = do
   GuguguScalaOption{..} <- asks toGuguguScalaOption
   dataCode <- mkTypeCode d
   (typeDef, maybeObjWithoutCodec) <- case dataCon of
@@ -358,7 +358,7 @@ makeForeignDataCodecStats :: GuguguK r m
                           => Module
                           -> Data
                           -> m ForeignTypeResult
-makeForeignDataCodecStats md@Module{..} d@Data{..} = do
+makeForeignDataCodecStats md d = do
   tThis <- (\i -> TParamed i []) <$> resolveForeign' d
   (encodeF, decodeF) <- mkForeignCodecName md d
   let encodeImpl         = TMSD FunDcl

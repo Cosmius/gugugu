@@ -84,7 +84,7 @@ makeModules :: MonadError String m
 makeModules opts@GuguguPythonOption{..} modules = do
   let moduleMap = Map.fromList $
         fmap (\md@Module{..} -> (moduleName, md)) modules
-  foreignsAndFiles <- for modules $ \md@Module{..} -> do
+  foreignsAndFiles <- for modules $ \md -> do
     let rCtx = ResolutionContext
           { rcModules       = moduleMap
           , rcCurrentModule = md
