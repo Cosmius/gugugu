@@ -251,7 +251,7 @@ alexGetByte p@PInput{ pLoc = loc@SourceLocation{..}, .. } = case pPending of
   []     -> if slOffset >= pLen then Nothing else
     let ch        = V.unsafeIndex pSrc slOffset
         newLoc    = moveLoc ch loc
-        (!b) : bs = B.unpack . T.encodeUtf8 . T.singleton $ ch
+        b :| bs   = charToUtf8Word8s ch
         !newP     = p
           { pLoc      = newLoc
           , pPending  = bs
@@ -282,5 +282,8 @@ moveLoc ch loc@SourceLocation{..} = case ch of
 
 tabSize :: Int
 tabSize = 8
+
+charToUtf8Word8s :: Char -> NonEmpty Word8
+charToUtf8Word8s = NonEmpty.fromList . B.unpack . T.encodeUtf8 . T.singleton
 
 }
