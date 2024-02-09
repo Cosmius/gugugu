@@ -46,3 +46,13 @@ jobs:
         with:
           name: x-test-${{ runner.os }}-${{ runner.arch }}
           path: tmp/test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: x-test-${{ runner.os }}-${{ runner.arch }}
+          path: tmp/test
+      - run: bash .github/workflows/publish.sh
+        shell: bash
+      - uses: actions/upload-artifact@v3
+        with:
+          name: gugugu-${{ runner.os }}-${{ runner.arch }}
+          path: build/release
