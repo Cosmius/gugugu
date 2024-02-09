@@ -1,5 +1,3 @@
-import scala.language.higherKinds
-
 trait ClientTransport[F[_], G[_], M[_], RA, RB] {
   def send[A, B]( name: QualName[String]
                 , fa: F[A]

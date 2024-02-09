@@ -47,6 +47,7 @@ https://bitbucket.org/Cosmius/gugugu/downloads/
 
    installation
    syntax
+   changes
 
 Targets
 -------

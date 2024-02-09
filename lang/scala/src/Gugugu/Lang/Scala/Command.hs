@@ -52,8 +52,11 @@ guguguScalaMain = runExceptIO $ do
       writeRuntimeFiles "codec" codecFiles
     when (withClient opts || withServer opts) $ do
       let transportFiles = transportCommonFiles
-            <> (if withServer opts then serverFiles else [])
-            <> (if withClient opts then clientFiles else [])
+            <> (if withServer opts then insertHigherKinds serverFiles else [])
+            <> (if withClient opts then insertHigherKinds clientFiles else [])
+          higherKindsImport = "import scala.language.higherKinds\n\n"
+          insertHigherKinds = if noHigherKindsImport opts then id else fmap $
+            \(name, content) -> (name, higherKindsImport <> content)
       writeRuntimeFiles "transport" transportFiles
   for_ (Map.toList fs) $ \(p, sf) ->
     writeSrcCompToFile (outputDir </> p) sf
@@ -76,6 +79,11 @@ optParser = do
     , help "location of gugugu runtime package"
     ]
   ~(withCodec, withServer, withClient) <- pWithCodecServerClient
+  noHigherKindsImport <- switch $ fold
+    [ long "no-higher-kinds-import"
+    , help
+        "pass this flag to disable import scala.language.higherKinds, which is not necessary in scala 2.13+"
+    ]
   nameTransformers <- guguguNameTransformers GuguguNameTransformers
     { transModuleCode  = ToLower
     , transModuleValue = ToSnake

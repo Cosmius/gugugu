@@ -13,6 +13,7 @@ Quick Start
            --with-codec \
            --with-server \
            --with-client \
+           --no-higher-kinds-import \
            ;
 
 
@@ -452,12 +453,13 @@ Command Line Options
    Usage: gugugu-scala (-i|--input INPUT) (-o|--output OUTPUT)
                        (-p|--package-prefix PACKAGE_PREFIX)
                        [-r|--runtime-package RUNTIME_PACKAGE] [--with-codec]
-                       [--with-server] [--with-client] [--trans-module-code ARG]
-                       [--trans-module-value ARG] [--trans-module-type ARG]
-                       [--trans-func-code ARG] [--trans-func-value ARG]
-                       [--trans-type-code ARG] [--trans-type-func ARG]
-                       [--trans-field-code ARG] [--trans-field-value ARG]
-                       [--trans-enum-code ARG] [--trans-enum-value ARG] [--version]
+                       [--with-server] [--with-client] [--no-higher-kinds-import]
+                       [--trans-module-code ARG] [--trans-module-value ARG]
+                       [--trans-module-type ARG] [--trans-func-code ARG]
+                       [--trans-func-value ARG] [--trans-type-code ARG]
+                       [--trans-type-func ARG] [--trans-field-code ARG]
+                       [--trans-field-value ARG] [--trans-enum-code ARG]
+                       [--trans-enum-value ARG] [--version]
 
    Available options:
      -i,--input INPUT         the directory containing the definition files
@@ -465,27 +467,30 @@ Command Line Options
      -p,--package-prefix PACKAGE_PREFIX
                               the package prefix, e.g. com.example.foo.generated
      -r,--runtime-package RUNTIME_PACKAGE
-                              location of gugugu runtime
-                              package (default: "gugugu.lang.scala.runtime")
+                              location of gugugu runtime package
+                              (default: "gugugu.lang.scala.runtime")
      --with-codec             pass this flag to generate codecs, default to false
      --with-server            pass this flag to generate server, default to false,
                               implies with-codec
      --with-client            pass this flag to generate client, default to false,
                               implies with-codec
+     --no-higher-kinds-import pass this flag to disable import
+                              scala.language.higherKinds, which is not necessary in
+                              scala 2.13+
      --trans-module-code ARG  module name transformer for code (default: lower)
      --trans-module-value ARG module name transformer for value (default: snake)
-     --trans-module-type ARG  module name transformer for type of
-                              client/server (default: id)
+     --trans-module-type ARG  module name transformer for type of client/server
+                              (default: id)
      --trans-func-code ARG    function name transformer for code (default: id)
      --trans-func-value ARG   function name transformer for value (default: snake)
      --trans-type-code ARG    type name transformer for code (default: id)
      --trans-type-func ARG    type name transformer in function (default: id)
      --trans-field-code ARG   record field name transformer for code (default: id)
-     --trans-field-value ARG  record field name transformer for
-                              value (default: snake)
+     --trans-field-value ARG  record field name transformer for value
+                              (default: snake)
      --trans-enum-code ARG    enum name transformer for code (default: id)
-     --trans-enum-value ARG   enum name transformer for
-                              value (default: upper-snake)
+     --trans-enum-value ARG   enum name transformer for value
+                              (default: upper-snake)
      -h,--help                Show this help text
      --help-transformers      list available name transformers
      --version                show version

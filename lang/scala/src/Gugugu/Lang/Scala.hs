@@ -37,12 +37,19 @@ import           Gugugu.Lang.Scala.SourceUtils
 -- | Option for 'makeFiles'
 data GuguguScalaOption
   = GuguguScalaOption
-    { packagePrefix    :: [Text]                  -- ^ Package prefix
-    , runtimePkg       :: [Text]                  -- ^ Gugugu runtime package
-    , withCodec        :: Bool                    -- ^ True if generate codec
-    , withServer       :: Bool                    -- ^ True if generate server
-    , withClient       :: Bool                    -- ^ True if generate client
-    , nameTransformers :: GuguguNameTransformers  -- ^ Name transformers
+    { packagePrefix       :: [Text]
+    -- ^ Package prefix
+    , runtimePkg          :: [Text]
+    -- ^ Gugugu runtime package
+    , withCodec           :: Bool
+    -- ^ True if generate codec
+    , withServer          :: Bool
+    -- ^ True if generate server
+    , withClient          :: Bool
+    -- ^ True if generate client
+    , noHigherKindsImport :: Bool
+    -- ^ False if import scala.language.higherKinds
+    , nameTransformers    :: GuguguNameTransformers  -- ^ Name transformers
     }
   deriving Show
 
@@ -447,7 +454,8 @@ makeTransport md@Module{..} = do
   traitName <- mkModuleType md
   let compilationUnit = CompilationUnit
         { cuPackage    = QualId moduleCode
-        , cuPkgImports = [(QualId ("scala" :| ["language"]), ["higherKinds"])]
+        , cuPkgImports = if noHigherKindsImport then []
+            else [(QualId ("scala" :| ["language"]), ["higherKinds"])]
         , cuTopStats   = [TST traitDef, TSO objectDef]
         }
       path            = pkgDir moduleCode </> (T.unpack traitName <> ".scala")

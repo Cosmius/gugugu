@@ -20,5 +20,6 @@ gugugu-scala \
 	--with-codec \
 	--with-server \
 	--with-client \
+	--no-higher-kinds-import \
 	--package-prefix=guguguexamples.definitions \
 	;
