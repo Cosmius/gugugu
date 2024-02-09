@@ -9,7 +9,7 @@ from typing import TypeVar, Callable, Any, Iterable
 
 from werkzeug.exceptions import NotFound
 from werkzeug.serving import run_simple
-from werkzeug.wrappers import BaseRequest, BaseResponse
+from werkzeug.wrappers import Request, Response
 
 from gugugu.lang.python.runtime.transport import QualName
 from guguguexamples.codec.json import JsonCodecImpl
@@ -84,7 +84,7 @@ class WsgiApp(Thread):
         run_simple(HOST, PORT, self.wsgi_app)
 
     def wsgi_app(self, environ, start_response) -> Iterable[bytes]:
-        request = BaseRequest(environ)
+        request = Request(environ)
         parts = request.path.lstrip("/").split("/")
         qual_name = QualName(parts[:-1], parts[-1])
         handler = self.transport.ask(qual_name, self.handle_encoding)
@@ -99,7 +99,7 @@ class WsgiApp(Thread):
             r_with_meta.data,
             ensure_ascii=False,
         )
-        r = BaseResponse(
+        r = Response(
             serialized, status=200, content_type="application/json")
         for k, v in r_with_meta.meta.items():
             r.headers[k] = v
