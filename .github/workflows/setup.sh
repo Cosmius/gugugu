@@ -3,10 +3,10 @@
 set -e
 
 case "$RUNNER_ARCH" in
-	X64)
+	X64|ARM64)
 		;;
 	*)
-		echo "Unexpected RUNNER_OS=$RUNNER_OS"
+		echo "Unexpected RUNNER_ARCH=$RUNNER_ARCH"
 		exit 1
 		;;
 esac
