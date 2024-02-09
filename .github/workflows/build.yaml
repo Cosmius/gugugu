@@ -32,7 +32,9 @@ jobs:
         shell: bash
       - uses: actions/cache@v4
         with:
-          key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('stack.yaml', '**/package.yaml', 'hpack-common.yaml') }}
+          key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{
+            hashFiles('stack.yaml', 'hpack-common.yaml',
+                      'lang/*/package.yaml', 'examples/lang/haskell/package.yaml') }}
           path: ${{ steps.setup.outputs.STACK_ROOT }}
       - run: bash .github/workflows/build.sh
         shell: bash
