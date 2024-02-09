@@ -27,7 +27,7 @@ jobs:
         with:
           enable-stack: true
           stack-no-global: true
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v4
         with:
           distribution: "zulu"
           java-version: "21"
