@@ -1,12 +1,17 @@
 [package]
 name = "gugugu-rust-example"
 version = "0.0.0"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 chrono = "0.4"
-time = "0.1"
 serde_json = "1.0"
 http = "0.2"
-hyper = "0.13"
-tokio = { version = "0.2", features = ["io-std"] }
+
+[dependencies.hyper]
+version = "0.14"
+features = ["http1", "tcp", "client", "server"]
+
+[dependencies.tokio]
+version = "1.36"
+features = ["rt-multi-thread", "io-std", "io-util"]

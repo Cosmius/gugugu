@@ -27,7 +27,7 @@ use gugugu_rust_example::utils::{get_host_and_port, err};
 
 fn main() -> ()
 {
-  let mut runtime = match Runtime::new() {
+  let runtime = match Runtime::new() {
     Ok(v) => v,
     Err(_) => {
       println!("Cannot allocate tokio runtime");

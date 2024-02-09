@@ -11,8 +11,7 @@ use serde_json::Value;
 use http::StatusCode;
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Request, Response, Server};
-use chrono::NaiveDateTime;
-use time::Duration;
+use chrono::{Duration, NaiveDateTime};
 
 use gugugu_rust_example::gugugu::lang::rust::runtime::codec::{
   EncoderImpl, Encoding, DecoderImpl, Decoding,
@@ -36,7 +35,7 @@ use gugugu_rust_example::jsonhttp::{
 use gugugu_rust_example::utils::{get_host_and_port, err};
 
 fn main() -> () {
-  let mut runtime = match Runtime::new() {
+  let runtime = match Runtime::new() {
     Ok(v) => v,
     Err(_) => {
       println!("Cannot allocate tokio runtime");
