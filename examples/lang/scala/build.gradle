@@ -2,13 +2,14 @@ plugins {
   id "scala"
 }
 
-def scalaVersion = "2.12"
-def http4sVersion = "0.20.6"
-def log4CatsVersion = "0.3.0"
-def logbackVersion = "1.2.3"
+def scalaVersion = "2.13"
+def http4sVersion = "0.23.25"
+def http4sBlazeVersion = "0.23.16"
+def log4CatsVersion = "2.6.0"
+def logbackVersion = "1.4.14"
 
 repositories {
-  jcenter()
+  mavenCentral()
 }
 
 configurations {
@@ -16,27 +17,27 @@ configurations {
 }
 
 dependencies {
-  implementation "org.scala-lang:scala-library:${scalaVersion}.8"
+  implementation "org.scala-lang:scala-library:${scalaVersion}.12"
 
-  implementation "org.typelevel:cats-core_${scalaVersion}:1.6.1"
-  implementation "org.typelevel:cats-effect_${scalaVersion}:1.3.1"
+  implementation "org.typelevel:cats-core_${scalaVersion}:2.10.0"
+  implementation "org.typelevel:cats-effect_${scalaVersion}:3.5.3"
 
-  implementation "io.circe:circe-core_${scalaVersion}:0.11.1"
+  implementation "io.circe:circe-core_${scalaVersion}:0.14.6"
 
   implementation "org.http4s:http4s-core_${scalaVersion}:${http4sVersion}"
   implementation "org.http4s:http4s-client_${scalaVersion}:${http4sVersion}"
   implementation "org.http4s:http4s-server_${scalaVersion}:${http4sVersion}"
   implementation "org.http4s:http4s-circe_${scalaVersion}:${http4sVersion}"
-  implementation "org.http4s:http4s-blaze-client_${scalaVersion}:${http4sVersion}"
-  implementation "org.http4s:http4s-blaze-server_${scalaVersion}:${http4sVersion}"
+  implementation "org.http4s:http4s-blaze-client_${scalaVersion}:${http4sBlazeVersion}"
+  implementation "org.http4s:http4s-blaze-server_${scalaVersion}:${http4sBlazeVersion}"
 
-  implementation "io.chrisdavenport:log4cats-core_${scalaVersion}:${log4CatsVersion}"
-  implementation "io.chrisdavenport:log4cats-slf4j_${scalaVersion}:${log4CatsVersion}"
+  implementation "org.typelevel:log4cats-core_${scalaVersion}:${log4CatsVersion}"
+  implementation "org.typelevel:log4cats-slf4j_${scalaVersion}:${log4CatsVersion}"
 
   implementation "ch.qos.logback:logback-core:${logbackVersion}"
   implementation "ch.qos.logback:logback-classic:${logbackVersion}"
 
-  scalaCompilerPlugin "org.typelevel:kind-projector_${scalaVersion}:0.10.3"
+  scalaCompilerPlugin "org.typelevel:kind-projector_2.13.12:0.13.2"
 }
 
 sourceSets {
@@ -47,25 +48,24 @@ sourceSets {
   }
 }
 
-compileScala {
-  scalaCompileOptions.deprecation = true
-  scalaCompileOptions.additionalParameters = [
-    "-Ypartial-unification",
-    "-feature",
-    "-Xplugin:" + configurations.scalaCompilerPlugin.asPath]
+ compileScala {
+   scalaCompileOptions.deprecation = true
+   scalaCompileOptions.additionalParameters = [
+     "-feature",
+     "-Xplugin:" + configurations.scalaCompilerPlugin.asPath]
+ }
+
+
+tasks.register('runJsonHttpServer', JavaExec) {
+  mainClass = "guguguexamples.jsonhttp.server.JsonHttpServerMain"
+}
+
+tasks.register('runJsonHttpClient', JavaExec) {
+  mainClass = "guguguexamples.jsonhttp.client.JsonHttpClientMain"
 }
 
 
-task runJsonHttpServer(type: JavaExec) {
-  main = "guguguexamples.jsonhttp.server.JsonHttpServerMain"
-}
-
-task runJsonHttpClient(type: JavaExec) {
-  main = "guguguexamples.jsonhttp.client.JsonHttpClientMain"
-}
-
-
-tasks.withType(JavaExec) {
+tasks.withType(JavaExec).configureEach {
   classpath = sourceSets.main.runtimeClasspath
   standardInput = System.in
 }

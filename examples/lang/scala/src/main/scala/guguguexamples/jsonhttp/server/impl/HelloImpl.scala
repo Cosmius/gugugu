@@ -1,20 +1,17 @@
 package guguguexamples.jsonhttp.server.impl
 
 import java.time.LocalDateTime
-
-import cats.effect.{IO, Timer}
+import cats.effect.{IO, Clock}
 import cats.implicits._
 import guguguexamples.definitions.hello._
 import guguguexamples.definitions.hellotypes._
 import guguguexamples.jsonhttp.WithMeta
 import guguguexamples.jsonhttp.server.HandlerF
 import guguguexamples.utils.ContT
-import io.chrisdavenport.log4cats.Logger
-import io.chrisdavenport.log4cats.slf4j.Slf4jLogger
+import org.typelevel.log4cats.Logger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 
-import scala.concurrent.duration.MILLISECONDS
-
-class HelloImpl(implicit timer: Timer[IO])
+class HelloImpl(implicit clock: Clock[IO])
   extends HelloModule[WithMeta, WithMeta, HandlerF] {
 
   private val logger: Logger[IO] = Slf4jLogger.getLogger
@@ -59,13 +56,13 @@ class HelloImpl(implicit timer: Timer[IO])
                             (k: A => HandlerF[B]): HandlerF[WithMeta[B]] = {
     val (metadata, a) = fa
     for {
-      begin <- ContT.lift(timer.clock.realTime(MILLISECONDS))
-      _ <- metadata.toStream.traverse_[HandlerF, Unit] { case (k, v) =>
+      begin <- ContT.lift(clock.realTime)
+      _ <- metadata.toList.traverse_[HandlerF, Unit] { case (k, v) =>
         ContT.lift(logger.info(s"Got Metadata: $k = $v"))
       }
       b <- k(a)
-      end <- ContT.lift(timer.clock.realTime(MILLISECONDS))
-    } yield (Map("X-Process-Time" -> s"${end - begin}ms"), b)
+      end <- ContT.lift(clock.realTime)
+    } yield (Map("X-Process-Time" -> s"${(end - begin).toMillis}ms"), b)
   }
 
 }

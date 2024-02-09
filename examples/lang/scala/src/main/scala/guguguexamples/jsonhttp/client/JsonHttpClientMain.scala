@@ -1,25 +1,25 @@
 package guguguexamples.jsonhttp.client
 
-import java.time.LocalDateTime
-
-import cats.effect.{ContextShift, IO, Resource, Timer}
+import cats.effect.unsafe.IORuntime
+import cats.effect.{IO, Resource}
 import cats.implicits._
 import guguguexamples.codec.JsonCodecImpl
 import guguguexamples.definitions.hello._
 import guguguexamples.definitions.hellotypes._
 import guguguexamples.jsonhttp._
 import guguguexamples.utils.EnvConfig
-import io.chrisdavenport.log4cats.Logger
-import io.chrisdavenport.log4cats.slf4j.Slf4jLogger
 import org.http4s._
+import org.http4s.blaze.client.BlazeClientBuilder
 import org.http4s.client.Client
-import org.http4s.client.blaze.BlazeClientBuilder
+import org.typelevel.log4cats.Logger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 
-import scala.concurrent.ExecutionContext
+import java.time.LocalDateTime
 
 object JsonHttpClientMain {
 
   def main(args: Array[String]): Unit = {
+    implicit val ioRuntime: IORuntime = IORuntime.builder().build()
     run.unsafeRunSync()
   }
 
@@ -43,15 +43,13 @@ object JsonHttpClientMain {
     for {
       resWithMeta <- k(reqWithMeta)
       (resMeta, res) = resWithMeta
-      _ <- resMeta.toStream.traverse_ { case (k, v) =>
+      _ <- resMeta.toList.traverse_ { case (k, v) =>
         logger.info(s"Metadata: $k = $v")
       }
       _ <- logger.info(s"Got response: $res")
     } yield ()
   }
 
-  private implicit val contextShiftIO: ContextShift[IO] = IO.contextShift(ExecutionContext.global)
-  private implicit val timerIO: Timer[IO] = IO.timer(ExecutionContext.global)
   private val logger: Logger[IO] = Slf4jLogger.getLogger
 
   def helloModuleResource: Resource[IO, HelloModule[WithMeta, WithMeta, IO]] = {
@@ -69,7 +67,7 @@ object JsonHttpClientMain {
   }
 
   def httpClientResource: Resource[IO, Client[IO]] = {
-    BlazeClientBuilder[IO](ExecutionContext.global).resource
+    BlazeClientBuilder[IO].resource
   }
 
 }

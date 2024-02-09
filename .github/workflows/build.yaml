@@ -27,6 +27,13 @@ jobs:
         with:
           enable-stack: true
           stack-no-global: true
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "21"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - run: bash .github/workflows/setup.sh
         id: setup
         shell: bash
@@ -38,9 +45,6 @@ jobs:
           path: ${{ steps.setup.outputs.STACK_ROOT }}
       - run: bash .github/workflows/build.sh
         shell: bash
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
       - run: bash .github/workflows/test.sh
         shell: bash
       - uses: actions/upload-artifact@v4

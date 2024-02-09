@@ -2,8 +2,6 @@ package guguguexamples.utils
 
 import cats.{Monad, StackSafeMonad}
 
-import scala.language.higherKinds
-
 case class ContT[R, M[_], A](run: (A => M[R]) => M[R]) {
 
   def map[B](f: A => B): ContT[R, M, B] = {

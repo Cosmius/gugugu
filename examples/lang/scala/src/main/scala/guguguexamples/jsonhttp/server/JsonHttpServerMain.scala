@@ -1,29 +1,28 @@
 package guguguexamples.jsonhttp.server
 
-import java.net.InetSocketAddress
-
 import cats.data.{Kleisli, NonEmptyVector}
-import cats.effect.{ContextShift, IO, Resource, Timer}
+import cats.effect.unsafe.IORuntime
+import cats.effect.{IO, Resource}
 import gugugu.lang.scala.runtime.transport._
 import guguguexamples.codec.JsonCodecImpl
 import guguguexamples.definitions.hello._
 import guguguexamples.jsonhttp._
 import guguguexamples.jsonhttp.server.impl._
 import guguguexamples.utils._
-import io.chrisdavenport.log4cats.Logger
-import io.chrisdavenport.log4cats.slf4j.Slf4jLogger
 import io.circe.Json
 import org.http4s._
 import org.http4s.circe._
 import org.http4s.server.Server
-import org.http4s.server.blaze.BlazeServerBuilder
+import org.http4s.blaze.server.BlazeServerBuilder
+import org.typelevel.log4cats.Logger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 
-import scala.concurrent.ExecutionContext
-import scala.language.higherKinds
+import java.net.InetSocketAddress
 
 object JsonHttpServerMain {
 
   def main(args: Array[String]): Unit = {
+    implicit val ioRuntime: IORuntime = IORuntime.builder().build()
     run.unsafeRunSync()
   }
 
@@ -37,11 +36,9 @@ object JsonHttpServerMain {
     }
   }
 
-  private implicit val contextShiftIO: ContextShift[IO] = IO.contextShift(ExecutionContext.global)
-  private implicit val timerIO: Timer[IO] = IO.timer(ExecutionContext.global)
   private val logger: Logger[IO] = Slf4jLogger.getLogger
 
-  def serverResource: Resource[IO, Server[IO]] = {
+  def serverResource: Resource[IO, Server] = {
     val addr = InetSocketAddress.createUnresolved(
       EnvConfig.host, EnvConfig.port)
     BlazeServerBuilder[IO]
@@ -64,7 +61,7 @@ object JsonHttpServerMain {
   def handleRequest(req: Request[IO]): HandlerF[Response[IO]] = {
     (for {
       ps <- NonEmptyVector.fromVector {
-        req.pathInfo.stripPrefix("/").split('/').toVector
+        req.pathInfo.toString().stripPrefix("/").split('/').toVector
       }
       qualName = QualName(ps.init, ps.last)
       k <- transport.ask(qualName, ContCodecHandler)
@@ -87,7 +84,7 @@ object JsonHttpServerMain {
         val hs = metaToHeaders(resMeta)
         Response[IO]()
           .withEntity(resR)
-          .putHeaders(hs: _*)
+          .putHeaders(hs.toSeq)
       }
     }).getOrElse(ContT.pure(Response[IO](Status.NotFound)))
 
