@@ -54,11 +54,11 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: x-test-${{ runner.os }}-${{ runner.arch }}
+          name: x-test-${{ env.GUGUGU_OS }}-${{ env.GUGUGU_ARCH }}
           path: tmp/test
       - run: bash .github/workflows/publish.sh
         shell: bash
       - uses: actions/upload-artifact@v4
         with:
-          name: gugugu-${{ runner.os }}-${{ runner.arch }}
+          name: gugugu-${{ env.GUGUGU_OS }}-${{ env.GUGUGU_ARCH }}
           path: build/release
