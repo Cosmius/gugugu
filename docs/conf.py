@@ -65,8 +65,8 @@ html_static_path = ["_static"]
 html_theme_options = {
     "description": f"{release}",
     "extra_nav_links": {
-        "Source at BitBucket": "https://bitbucket.org/Cosmius/gugugu",
-        "Prebuilt binaries": "https://bitbucket.org/Cosmius/gugugu/downloads/",
+        "Source at GitHub": "https://github.com/Cosmius/gugugu",
+        "Prebuilt binaries": "https://github.com/Cosmius/gugugu/releases",
     },
 }
 

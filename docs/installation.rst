@@ -14,7 +14,7 @@ Use Prebuilt Binaries
 ---------------------
 
 * Download the package for your operating system at
-  https://bitbucket.org/Cosmius/gugugu/downloads/ .
+  https://github.com/Cosmius/gugugu/releases .
 * Unpack the archive and put the executables to somewhere in your ``PATH``.
   You can pick only the target you need, they are all independent from others.
 

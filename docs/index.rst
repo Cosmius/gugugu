@@ -19,7 +19,7 @@ The definition syntax is a strict subset of Haskell.
    :language: haskell
 
 There are prebuilt binaries available at
-https://bitbucket.org/Cosmius/gugugu/downloads/
+https://github.com/Cosmius/gugugu/releases
 
 
 .. toctree::
