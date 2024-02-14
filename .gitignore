@@ -1,9 +1,11 @@
 # Common directories
-build/
-target/
+local/
+var/
 run/
 tmp/
 dist/
+build/
+target/
 
 # Native objects
 *.o

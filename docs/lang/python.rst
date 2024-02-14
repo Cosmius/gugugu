@@ -184,7 +184,7 @@ The ``S`` is the state used in encoding/decoding.
 The ``R`` is the serialized type encoding to or decoding from.
 
 You might find
-`examples/lang/python/src/guguguexamples/codec/json.py <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/python/src/guguguexamples/codec/json.py>`_
+:gugugu-source:`examples/lang/python/src/guguguexamples/codec/json.py`
 useful to write a ``EncoderImpl``/``DecoderImpl``.
 
 Most functions in the types works with only ``S`` except the following two.
@@ -501,7 +501,7 @@ and you are responsible to handle that.
 The function should be polymorphic over type ``A`` and ``B``.
 
 Please consult
-`examples/lang/python/src/guguguexamples/jsonhttp/server.py <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/python/src/guguguexamples/jsonhttp/server.py>`_
+:gugugu-source:`examples/lang/python/src/guguguexamples/jsonhttp/server.py`
 for how to use the it.
 
 Client Usage
@@ -542,7 +542,7 @@ and return an response about type ``RB``.
 Like ``ServerCodecHandler``, you are responsible to handle possible exceptions.
 
 Please consult
-`examples/lang/python/src/guguguexamples/jsonhttp/client.py <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/python/src/guguguexamples/jsonhttp/client.py>`_
+:gugugu-source:`examples/lang/python/src/guguguexamples/jsonhttp/client.py`
 for how to write a ``ClientTransport``.
 
 

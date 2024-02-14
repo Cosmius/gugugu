@@ -159,7 +159,7 @@ The ``S`` is the state used in encoding/decoding.
 The ``R`` is the serialized type encoding to or decoding from.
 
 You might find
-`examples/lang/scala/src/main/scala/guguguexamples/codec/JsonCodecImpl.scala <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/scala/src/main/scala/guguguexamples/codec/JsonCodecImpl.scala>`_
+:gugugu-source:`examples/lang/scala/src/main/scala/guguguexamples/codec/JsonCodecImpl.scala`
 useful to write a ``EncoderImpl``/``DecoderImpl``.
 
 Most functions in the traits works with only ``S`` except the following two.
@@ -417,7 +417,7 @@ corresponding ``EncoderImpl``/``DecoderImpl``,
 and you are responsible to handle that.
 
 Please consult
-`examples/lang/scala/src/main/scala/guguguexamples/jsonhttp/server/ <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/scala/src/main/scala/guguguexamples/jsonhttp/server/>`_
+:gugugu-source:`examples/lang/scala/src/main/scala/guguguexamples/jsonhttp/server/`
 for how to use the ``ServerTransport``.
 
 Client Usage
@@ -442,7 +442,7 @@ and return an response about type ``RB``.
 Like ``ServerCodecHandler``, you are responsible to handle possible exceptions.
 
 Please consult
-`examples/lang/scala/src/main/scala/guguguexamples/jsonhttp/client/ <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/scala/src/main/scala/guguguexamples/jsonhttp/client/>`_
+:gugugu-source:`examples/lang/scala/src/main/scala/guguguexamples/jsonhttp/client/`
 for how to write a ``ClientTransport``.
 
 Command Line Options

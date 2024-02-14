@@ -10,9 +10,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath("."))
+import os
+import sys
+sys.path.append(os.path.abspath("./_ext"))
 import yaml
 from pathlib import Path
 
@@ -38,6 +38,7 @@ release = hpack_common["version"]
 # extensions coming with Sphinx (named "sphinx.ext.*") or your custom
 # ones.
 extensions = [
+    "gugugu",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -68,3 +69,8 @@ html_theme_options = {
         "Prebuilt binaries": "https://bitbucket.org/Cosmius/gugugu/downloads/",
     },
 }
+
+
+def gugugu_get_source_link(path: str):
+    rv = f"https://github.com/Cosmius/gugugu/blob/master/{path}"
+    return rv.rstrip("/")

@@ -165,7 +165,7 @@ They both have three associated types ``Repr``, ``Error`` and ``State``.
 - The ``State`` is the intermediate state used during encoding or decoding.
 
 You might find
-`examples/lang/rust/src/codec/json.rs <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/rust/src/codec/json.rs>`_
+:gugugu-source:`examples/lang/rust/src/codec/json.rs`
 useful to write implementation for ``EncoderImpl``/``DecoderImpl``.
 
 Most trait functions do not use ``Repr`` except the following two.
@@ -517,7 +517,7 @@ it should handle a request deserialized from ``RA`` with response serialized to
 ``RB``.
 
 Please consult
-`examples/lang/rust/src/bin/gugugu-example-rust-jsonhttp-server.rs <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/rust/src/bin/gugugu-example-rust-jsonhttp-server.rs>`_
+:gugugu-source:`examples/lang/rust/src/bin/gugugu-example-rust-jsonhttp-server.rs`
 for how to use the it.
 
 Client Usage
@@ -561,7 +561,7 @@ Like ``ServerCodecHandler``,
 deserialized from ``RB``.
 
 Please consult
-`examples/lang/rust/src/bin/gugugu-example-rust-jsonhttp-client.rs <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/rust/src/bin/gugugu-example-rust-jsonhttp-client.rs>`_
+:gugugu-source:`examples/lang/rust/src/bin/gugugu-example-rust-jsonhttp-client.rs`
 for how to write a ``ClientTransport``.
 
 

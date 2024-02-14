@@ -149,7 +149,7 @@ They have kind ``* -> * -> (* -> *) -> (* -> *) -> Constraint``.
   and usually have instances of ``MonadError`` / ``MonadState``.
 
 You might find
-`examples/lang/haskell/src/GuguguExamples/Codec/Json.hs <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/haskell/src/GuguguExamples/Codec/Json.hs>`_
+:gugugu-source:`examples/lang/haskell/src/GuguguExamples/Codec/Json.hs`
 useful to write ``EncoderImpl``/``DecoderImpl``.
 
 Most class members do not use ``r`` and ``g`` except the following two.
@@ -371,7 +371,7 @@ and should return ``f ra -> m (g rb)``,
 the handler with ``ra`` and ``rb`` with decoding/encoding handled.
 
 Please consult
-`examples/lang/haskell/app/jsonhttp-server.hs <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/haskell/app/jsonhttp-server.hs>`_
+:gugugu-source:`examples/lang/haskell/app/jsonhttp-server.hs`
 for how to use the it.
 
 Client Usage
@@ -410,7 +410,7 @@ The ``ClientTransport`` is called with,
 and should return ``m (g b)``, the response.
 
 Please consult
-`examples/lang/haskell/app/jsonhttp-client.hs <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/haskell/app/jsonhttp-client.hs>`_
+:gugugu-source:`examples/lang/haskell/app/jsonhttp-client.hs`
 for how to write a ``ClientTransport``.
 
 

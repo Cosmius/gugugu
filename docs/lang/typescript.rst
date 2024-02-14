@@ -176,7 +176,7 @@ The ``S`` is the state used in encoding/decoding.
 The ``R`` is the serialized type encoding to or decoding from.
 
 You might find
-`examples/lang/typescript/src/codec/json-codec.ts <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/typescript/src/codec/json-codec.ts>`_
+:gugugu-source:`examples/lang/typescript/src/codec/json-codec.ts`
 useful to write a ``EncoderImpl``/``DecoderImpl``.
 
 Most functions in the interfaces works with only ``S`` except the following two.
@@ -412,7 +412,7 @@ corresponding ``EncoderImpl``/``DecoderImpl``,
 and you are responsible to handle that.
 
 Please consult
-`examples/lang/typescript/src/jsonhttp/server.ts <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/typescript/src/jsonhttp/server.ts>`_
+:gugugu-source:`examples/lang/typescript/src/jsonhttp/server.ts`
 for how to use the ``ServerTransport``.
 
 Client Usage
@@ -445,7 +445,7 @@ and return an response about type ``RB``.
 Like ``ServerCodecHandler``, you are responsible to handle possible exceptions.
 
 Please consult
-`examples/lang/typescript/src/jsonhttp/client.ts <https://bitbucket.org/Cosmius/gugugu/src/master/examples/lang/typescript/src/jsonhttp/client.ts>`_
+:gugugu-source:`examples/lang/typescript/src/jsonhttp/client.ts`
 for how to write a ``ClientTransport``.
 
 Command Line Options
