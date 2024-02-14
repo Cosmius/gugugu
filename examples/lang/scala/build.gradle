@@ -43,7 +43,7 @@ dependencies {
 sourceSets {
   main {
     scala {
-      srcDir "${projectDir}/build/generated/gugugu/main/scala"
+      srcDir "${projectDir}/gugugu-generated/main/scala"
     }
   }
 }

@@ -9,15 +9,15 @@ import {
 import {
   QualName,
   WithMeta,
-} from "../../build/generated/gugugu/gugugu/transport";
+} from "../../gugugu-generated/gugugu/transport";
 import {
   FoldRequest,
   HelloServer,
   AssociatedList,
-} from "../../build/generated/gugugu/guguguexamples/definitions/hello";
+} from "../../gugugu-generated/guguguexamples/definitions/hello";
 import {
   AssociatedListEntry,
-} from "../../build/generated/gugugu/guguguexamples/definitions/hellotypes";
+} from "../../gugugu-generated/guguguexamples/definitions/hellotypes";
 import {
   JsonCodecImpl,
   JsonRepr,

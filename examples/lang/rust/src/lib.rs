@@ -1,4 +1,4 @@
-#[path = "../target/generated/gugugu/gugugu"]
+#[path = "../gugugu-generated/gugugu"]
 pub mod gugugu {
   pub mod lang {
     pub mod rust {
@@ -7,7 +7,7 @@ pub mod gugugu {
   }
 }
 
-#[path = "../target/generated/gugugu/definitions/mod.rs"]
+#[path = "../gugugu-generated/definitions/mod.rs"]
 pub mod definitions;
 
 pub mod codec;

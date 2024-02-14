@@ -5,7 +5,7 @@ import {
 import {
   EncoderImpl,
   DecoderImpl,
-} from "../../build/generated/gugugu/gugugu/codec";
+} from "../../gugugu-generated/gugugu/codec";
 
 
 export type JsonRepr

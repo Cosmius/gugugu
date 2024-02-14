@@ -4,10 +4,10 @@ import {
   QualName,
   WithMeta,
   ClientTransport,
-} from "../../build/generated/gugugu/gugugu/transport";
+} from "../../gugugu-generated/gugugu/transport";
 import {
   HelloClient,
-} from "../../build/generated/gugugu/guguguexamples/definitions/hello";
+} from "../../gugugu-generated/guguguexamples/definitions/hello";
 import {
   JsonCodecImpl,
   JsonRepr,

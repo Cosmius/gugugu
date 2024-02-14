@@ -11,6 +11,6 @@ insert_final_newline = true
 [*.py]
 indent_size = 4
 
-[*.sh]
+[{*.sh,Makefile}]
 indent_style = tab
 indent_size = 8

@@ -19,7 +19,7 @@ dependencies:
 library:
   source-dirs:
     - src
-    - build/generated/gugugu
+    - gugugu-generated
 
 executables:
   gugugu-example-haskell-jsonhttp-server:

@@ -47,7 +47,7 @@ jobs:
             hashFiles('stack.yaml', 'hpack-common.yaml',
                       'lang/*/package.yaml', 'examples/lang/haskell/package.yaml') }}
           path: ${{ env.STACK_ROOT }}
-      - run: bash .github/workflows/build.sh
+      - run: make build
         shell: bash
       - run: bash .github/workflows/test.sh
         shell: bash
