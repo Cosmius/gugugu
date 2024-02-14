@@ -46,7 +46,7 @@ jobs:
           key: stack-all-${{ runner.os }}-${{ runner.arch }}-${{
             hashFiles('stack.yaml', 'hpack-common.yaml',
                       'lang/*/package.yaml', 'examples/lang/haskell/package.yaml') }}
-          path: ${{ steps.setup.outputs.STACK_ROOT }}
+          path: ${{ env.STACK_ROOT }}
       - run: bash .github/workflows/build.sh
         shell: bash
       - run: bash .github/workflows/test.sh

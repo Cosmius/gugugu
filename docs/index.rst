@@ -1,6 +1,12 @@
 Welcome to Gugugu's documentation!
 ==================================
 
+.. |github_action_ci| image:: https://github.com/Cosmius/gugugu/actions/workflows/build.yaml/badge.svg?branch=master
+   :target: https://github.com/Cosmius/gugugu/actions/workflows/build.yaml
+   :alt: GitHub Action Status
+
+|github_action_ci|
+
 Gugugu is a non-opinionated data serialization and RPC (Remote Procedure Call)
 framework.
 *Non-opinionated* means gugugu assumes very little on your implementation.
@@ -14,31 +20,6 @@ The definition syntax is a strict subset of Haskell.
 
 There are prebuilt binaries available at
 https://bitbucket.org/Cosmius/gugugu/downloads/
-
-
-.. |all_ci| image:: https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master
-   :target: https://dev.azure.com/cosmiafu/gugugu/_build
-   :alt: Azure Pipeline status
-
-.. |linux_ci| image:: https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master&jobName=build&configuration=build%20linux
-   :alt: Azure Pipeline status for Linux
-
-.. |darwin_ci| image:: https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master&jobName=build&configuration=build%20darwin
-   :alt: Azure Pipeline status for macOS
-
-.. |win32_ci| image:: https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master&jobName=build&configuration=build%20win32
-   :alt: Azure Pipeline status for Windows
-
-
-+---------+-------+-------------+
-| All     |       | |all_ci|    |
-+---------+-------+-------------+
-| Windows | amd64 | |win32_ci|  |
-+---------+-------+-------------+
-| macOS   | amd64 | |darwin_ci| |
-+---------+-------+-------------+
-| Linux   | amd64 | |linux_ci|  |
-+---------+-------+-------------+
 
 
 .. toctree::

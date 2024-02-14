@@ -1,5 +1,7 @@
 # Gugugu
 
+[![Build](https://github.com/Cosmius/gugugu/actions/workflows/build.yaml/badge.svg?branch=master)](https://github.com/Cosmius/gugugu/actions/workflows/build.yaml)
+
 Gugugu is a non-opinionated data serialization and RPC (Remote Procedure Call)
 framework.
 *Non-opinionated* means gugugu assumes very little on your implementation.
@@ -27,16 +29,6 @@ data Operation
   = Add
   | Mul
 ```
-
-
-## Build Status
-
-|  All    |       | [![Build Status](https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master)](https://dev.azure.com/cosmiafu/gugugu/_build) |
-|---------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Linux   | amd64 | ![Linux Status](https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master&jobName=build&configuration=build%20linux)       |
-| macOS   | amd64 | ![macOS Status](https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master&jobName=build&configuration=build%20darwin)      |
-| Windows | amd64 | ![Windows Status](https://dev.azure.com/cosmiafu/gugugu/_apis/build/status/gugugu?branchName=master&jobName=build&configuration=build%20win32)     |
-
 
 ## Documentation
 
